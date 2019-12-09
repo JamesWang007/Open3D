@@ -42,30 +42,62 @@ if __name__ == "__main__":
 
     mesh = meshes.armadillo()
 
-    bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(-30, 0, -10),
-                                               max_bound=(10, 20, 10))
+    #bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(-30, 0, -10),
+    #                                           max_bound=(10, 20, 10))
+    bbox = o3d.geometry.AxisAlignedBoundingBox()
+    bbox.min_bound = (-30, 0, -10)
+    bbox.max_bound = (10, 20, 10)
+    
     o3d.visualization.draw_geometries([mesh, bbox])
-    o3d.visualization.draw_geometries([mesh.crop(bbox), bbox])
+    o3d.visualization.draw_geometries(
+            [mesh.crop(min_bound = bbox.get_min_bound(), 
+                       max_bound = bbox.get_max_bound()), 
+                bbox])
 
-    bbox = o3d.geometry.OrientedBoundingBox(
-        center=(-10, 10, 0),
-        R=bbox.get_rotation_matrix_from_xyz((2, 1, 0)),
+    bbox = o3d.geometry.OrientedBoundingBox()
+    '''    center=(-10, 10, 0),
+        #R=bbox.get_rotation_matrix_from_xyz((2, 1, 0)),
+        R = (2, 1, 0),
         extent=(40, 20, 20),
-    )
+    )'''
+    bbox.center = (-10, 10, 0)
+    bbox.rotate((2, 1, 0))
+    bbox.translate((40, 20, 20))
+    
     o3d.visualization.draw_geometries([mesh, bbox])
-    o3d.visualization.draw_geometries([mesh.crop(bbox), bbox])
+    o3d.visualization.draw_geometries(
+            [mesh.crop(min_bound = bbox.get_min_bound(), 
+                       max_bound = bbox.get_max_bound()), 
+            bbox])
 
     pcd = mesh.sample_points_uniformly(500000)
 
-    bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(-30, 0, -10),
-                                               max_bound=(10, 20, 10))
+    #bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(-30, 0, -10),
+    #                                           max_bound=(10, 20, 10))
+    
+    bbox = o3d.geometry.AxisAlignedBoundingBox()
+    bbox.min_bound = (-30, 0, -10)
+    bbox.max_bound = (10, 20, 10)
+    
     o3d.visualization.draw_geometries([pcd, bbox])
-    o3d.visualization.draw_geometries([pcd.crop(bbox), bbox])
+    o3d.visualization.draw_geometries(
+            [pcd.crop(min_bound = bbox.get_min_bound(), 
+                       max_bound = bbox.get_max_bound()), 
+            bbox])
 
-    bbox = o3d.geometry.OrientedBoundingBox(
+    bbox = o3d.geometry.OrientedBoundingBox()
+    '''
         center=(-10, 10, 0),
-        R=bbox.get_rotation_matrix_from_xyz((2, 1, 0)),
+        #R=bbox.get_rotation_matrix_from_xyz((2, 1, 0)),
+        R = (2, 1, 0),
         extent=(40, 20, 20),
-    )
+    )'''
+    bbox.center = (-10, 10, 0)
+    bbox.rotate((2, 1, 0))
+    bbox.translate((40, 20, 20))
+    
     o3d.visualization.draw_geometries([pcd, bbox])
-    o3d.visualization.draw_geometries([pcd.crop(bbox), bbox])
+    o3d.visualization.draw_geometries(
+            [pcd.crop(min_bound = bbox.get_min_bound(), 
+                       max_bound = bbox.get_max_bound()), 
+            bbox])
