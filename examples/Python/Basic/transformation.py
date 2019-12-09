@@ -31,7 +31,8 @@ def animate(geom):
     vis = o3d.visualization.Visualizer()
     vis.create_window()
 
-    geom.rotate(geom.get_rotation_matrix_from_xyz((0.75, 0.5, 0)))
+    #geom.rotate(geom.get_rotation_matrix_from_xyz((0.75, 0.5, 0)))
+    geom.rotate((0.75, 0.5, 0))
     vis.add_geometry(geom)
 
     scales = [0.9 for _ in range(30)] + [1 / 0.9 for _ in range(30)]
@@ -40,7 +41,8 @@ def animate(geom):
          ] + [(-0.1, -0.1, 0.1) for _ in range(30)]
 
     for scale, aa in zip(scales, axisangles):
-        R = geom.get_rotation_matrix_from_axis_angle(aa)
+        #R = geom.get_rotation_matrix_from_axis_angle(aa)
+        R = aa
         geom.scale(scale).rotate(R, center=False)
         vis.update_geometry()
         vis.poll_events()
@@ -55,7 +57,8 @@ def animate(geom):
         time.sleep(0.05)
 
     for scale, aa, t in zip(scales, axisangles, ts):
-        R = geom.get_rotation_matrix_from_axis_angle(aa)
+        #R = geom.get_rotation_matrix_from_axis_angle(aa)
+        R = aa
         geom.scale(scale).translate(t).rotate(R, center=True)
         vis.update_geometry()
         vis.poll_events()

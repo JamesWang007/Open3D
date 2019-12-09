@@ -19,7 +19,8 @@ np.random.seed(42)
 
 def mesh_generator():
     mesh = o3d.geometry.TriangleMesh.create_box()
-    mesh.rotate(mesh.get_rotation_matrix_from_xyz((0.3, 0.5, 0.1)))
+    #mesh.rotate(mesh.get_rotation_matrix_from_xyz((0.3, 0.5, 0.1)))
+    mesh.rotate((0.3, 0.5, 0.1))
     yield "rotated box mesh", mesh
     yield "rotated box pcd", mesh.sample_points_uniformly(500)
 
@@ -41,6 +42,9 @@ if __name__ == "__main__":
 
     mesh = meshes.armadillo()
 
+    bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(-30, 0, -10),
+                                               max_bound=(10, 20, 10))
+    
     bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(-30, 0, -10),
                                                max_bound=(10, 20, 10))
     o3d.visualization.draw_geometries([mesh, bbox])
