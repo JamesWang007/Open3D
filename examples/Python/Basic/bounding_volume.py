@@ -44,9 +44,6 @@ if __name__ == "__main__":
 
     bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(-30, 0, -10),
                                                max_bound=(10, 20, 10))
-    
-    bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(-30, 0, -10),
-                                               max_bound=(10, 20, 10))
     o3d.visualization.draw_geometries([mesh, bbox])
     o3d.visualization.draw_geometries([mesh.crop(bbox), bbox])
 
